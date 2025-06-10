@@ -15,15 +15,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import android.util.Log;
 import android.view.TextureView;
-
-
-
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
     private void startCamera() {
         // You will later put your CameraX or Camera2 setup here
         Log.d("CAMERA", "Camera permission granted. Start camera preview...");
+        Toast.makeText(this, "Camera started", Toast.LENGTH_SHORT).show();
     }
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
 
@@ -39,15 +38,31 @@ public class MainActivity extends AppCompatActivity {
         });
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Permission not granted, request it
+
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA},
                     CAMERA_PERMISSION_REQUEST_CODE);
         } else {
-            // Permission already granted
+
             startCamera();
         }
 
 
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);  // ✅ important line
+
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                startCamera();
+            } else {
+
+                Toast.makeText(this, "Camera permission is required", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 }
