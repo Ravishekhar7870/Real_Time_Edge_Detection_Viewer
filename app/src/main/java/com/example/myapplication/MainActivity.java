@@ -3,6 +3,9 @@ package com.example.myapplication;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.camera2.CameraCaptureSession;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CaptureRequest;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -13,15 +16,33 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
+import android.util.Size;
 import android.view.TextureView;
 import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
+    private TextureView textureView;
+    private CameraDevice cameraDevice;
+    private CameraCaptureSession cameraCaptureSession;
+    private CaptureRequest.Builder previewRequestBuilder;
+    private String cameraId;
+    private Size previewSize;
+    private Handler backgroundHandler;
+    private HandlerThread backgroundThread;
+
     private void startCamera() {
         // You will later put your CameraX or Camera2 setup here
-        Log.d("CAMERA", "Camera permission granted. Start camera preview...");
+        textureView = findViewById(R.id.processed_view); // Your main TextureView
+
+        if (textureView.isAvailable()) {
+            openCamera();
+        } else {
+            textureView.setSurfaceTextureListener(surfaceTextureListener);
+        }
         Toast.makeText(this, "Camera started", Toast.LENGTH_SHORT).show();
     }
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
