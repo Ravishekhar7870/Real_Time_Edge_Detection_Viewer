@@ -66,4 +66,26 @@ Check ✅ NDK, CMake, and LLDB
 5. **Run the app:** <br>
 Grant camera permission <br>
 Test on a physical Android device (camera input on emulators may be limited)
+
+## 🧠 Architecture Overview
+
+```plaintext
++---------------------+
+| Java UI (Activity)  |
++---------------------+
+          ↓
+  Camera2 API captures frame
+          ↓
+  TextureView updates frame
+          ↓
+  Bitmap extracted → Grayscale Byte Array
+          ↓
+      JNI (Native C++)
+          ↓
+  OpenCV (GaussianBlur + Canny)
+          ↓
+  Result copied back to Java
+          ↓
+  Render via OpenGL ES (GLSurfaceView)
+```
    
