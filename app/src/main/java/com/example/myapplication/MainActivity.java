@@ -37,6 +37,7 @@ import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
+    public native String testOpenCV();
     private TextureView textureView;
     private CameraDevice cameraDevice;
     private CameraCaptureSession cameraCaptureSession;
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
     private Size previewSize;
     private Handler backgroundHandler;
     private HandlerThread backgroundThread;
+
+    static {
+        System.loadLibrary("myapplication"); // or "native-lib" based on your CMake target
+    }
     private void createCameraPreview() {
         try {
             SurfaceTexture texture = textureView.getSurfaceTexture();
@@ -191,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Log.d("OpenCVTest", testOpenCV());
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
 
