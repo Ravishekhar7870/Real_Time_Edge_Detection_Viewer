@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -12,6 +13,7 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -37,8 +39,13 @@ import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
-    public native String testOpenCV();
+
+
+
+    private NativeProcessor nativeProcessor = new NativeProcessor();
     private TextureView textureView;
+    private GLSurfaceView glSurfaceView;
+    private OpenGLRenderer openGLRenderer;
     private CameraDevice cameraDevice;
     private CameraCaptureSession cameraCaptureSession;
     private CaptureRequest.Builder previewRequestBuilder;
@@ -50,6 +57,26 @@ public class MainActivity extends AppCompatActivity {
     static {
         System.loadLibrary("myapplication"); // or "native-lib" based on your CMake target
     }
+    private byte[] bitmapToGrayscaleByteArray(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        byte[] gray = new byte[width * height];
+
+        int[] pixels = new int[width * height];
+        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+
+        for (int i = 0; i < pixels.length; i++) {
+            int color = pixels[i];
+            int r = (color >> 16) & 0xFF;
+            int g = (color >> 8) & 0xFF;
+            int b = color & 0xFF;
+            int luminance = (r + g + b) / 3;
+            gray[i] = (byte) luminance;
+        }
+
+        return gray;
+    }
+
     private void createCameraPreview() {
         try {
             SurfaceTexture texture = textureView.getSurfaceTexture();
@@ -182,7 +209,21 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onSurfaceTextureUpdated(SurfaceTexture surface) {}
+                public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+                    Bitmap bitmap = textureView.getBitmap();
+                    int width = bitmap.getWidth();
+                    int height = bitmap.getHeight();
+                    byte[] input = bitmapToGrayscaleByteArray(bitmap);
+
+                    // ✅ Step 3: Create output array for processed result
+                    byte[] output = new byte[width * height];
+
+                    // ✅ Step 4: Call native OpenCV function
+                    nativeProcessor.processFrame(input, width, height, output);
+                    openGLRenderer.updateImage(output, width, height);
+
+                    glSurfaceView.requestRender();
+                }
             };
 
 
@@ -196,7 +237,13 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Log.d("OpenCVTest", testOpenCV());
+        openGLRenderer = new OpenGLRenderer();
+        glSurfaceView = findViewById(R.id.processed_view); // ✅ Must be inside a method like onCreate()
+
+        glSurfaceView.setEGLContextClientVersion(2);
+        glSurfaceView.setRenderer(openGLRenderer);
+        glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
