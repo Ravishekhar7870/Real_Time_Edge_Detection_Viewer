@@ -24,7 +24,7 @@
 
 
 
-> Replace the above with real screenshots or a GIF demo when available.
+
 
 ---
 
