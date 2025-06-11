@@ -88,4 +88,12 @@ Test on a physical Android device (camera input on emulators may be limited)
           ↓
   Render via OpenGL ES (GLSurfaceView)
 ```
+## 🧩 Technologies Used
+
+- **Java** – Android UI, Camera2 API
+- **C++** – Native code via NDK, JNI integration
+- **OpenCV 4.x** – Image processing (Canny, GaussianBlur)
+- **OpenGL ES 2.0** – GPU-based rendering of processed output
+- **CMake** – Cross-platform build system for native code
+
    
