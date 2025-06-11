@@ -16,8 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/processed_container"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_percent="0.3"
         android:layout_marginBottom="8dp" />
+
+    <!-- 🔄 Switch Camera Button -->
+    <ImageButton
+        android:id="@+id/btn_switch_camera"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="Switch Camera"
+        android:src="@android:drawable/ic_menu_camera"
+        app:layout_constraintTop_toTopOf="@id/raw_preview"
+        app:layout_constraintEnd_toEndOf="@id/raw_preview"
+        android:layout_margin="12dp" />
 
     <!-- Bottom: Processed Edge-Detected Output in GLSurfaceView -->
     <androidx.cardview.widget.CardView
@@ -39,3 +51,4 @@
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
