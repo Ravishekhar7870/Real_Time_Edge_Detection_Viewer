@@ -20,7 +20,8 @@
 
 | Raw View                         | Processed Output (Canny + Blur)        |
 |----------------------------------|----------------------------------------|
-| ![Raw](screenshots/raw_view.png) | ![Processed](screenshots/processed.png) |
+| ![Raw](screenshots/raw_view.png) | ![screenshot2](https://github.com/user-attachments/assets/d96d7212-ec17-4469-bb8d-ae5438ad4619)|
+
 
 > Replace the above with real screenshots or a GIF demo when available.
 
