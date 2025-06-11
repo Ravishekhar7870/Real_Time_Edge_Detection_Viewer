@@ -41,3 +41,9 @@
    ```bash
    git clone https://github.com/your-username/vision-app.git
    cd vision-app
+
+   1. **Clone this repo:**
+
+   ```bash
+   git clone https://github.com/your-username/vision-app.git
+   cd vision-app
