@@ -42,7 +42,7 @@
    git clone https://github.com/your-username/vision-app.git
    cd vision-app
    ```
-2.  **Add OpenCV SDK:**
+2.  **Add OpenCV SDK:** <br>
      Download the OpenCV Android SDK ZIP <br>
      Extract it into the project at:
     
