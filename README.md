@@ -41,9 +41,12 @@
    ```bash
    git clone https://github.com/your-username/vision-app.git
    cd vision-app
-
-   1. **Clone this repo:**
-
+   ```
+   2.  **Add OpenCV SDK:**
+     Download the OpenCV Android SDK ZIP
+     Extract it into the project at:
+    
    ```bash
-   git clone https://github.com/your-username/vision-app.git
-   cd vision-app
+   sdk/OpenCV-android-sdk/
+   ```
+   
