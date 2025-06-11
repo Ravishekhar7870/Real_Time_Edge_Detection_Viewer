@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startCamera() {
         // You will later put your CameraX or Camera2 setup here
-        textureView = findViewById(R.id.processed_view); // Your main TextureView
+        textureView = findViewById(R.id.raw_preview); // Your main TextureView
 
         if (textureView.isAvailable()) {
             openCamera();
