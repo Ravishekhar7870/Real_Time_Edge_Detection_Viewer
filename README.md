@@ -18,9 +18,10 @@
 
 ## 📸 Screenshots
 
-| Raw View                         | Processed Output (Canny + Blur)        |
+| Back Camera                      | Front Camera     |
 |----------------------------------|----------------------------------------|
-| ![Raw](screenshots/raw_view.png) | ![screenshot2](https://github.com/user-attachments/assets/d96d7212-ec17-4469-bb8d-ae5438ad4619)|
+| ![screenshot1](https://github.com/user-attachments/assets/4381547d-1efb-4b5b-b5da-97c3a2b6a205) | ![screenshot2](https://github.com/user-attachments/assets/d96d7212-ec17-4469-bb8d-ae5438ad4619)|
+
 
 
 > Replace the above with real screenshots or a GIF demo when available.
