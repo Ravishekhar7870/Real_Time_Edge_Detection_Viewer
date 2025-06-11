@@ -49,4 +49,8 @@
    ```bash
    sdk/OpenCV-android-sdk/
    ```
+3. **Ensure NDK and CMake are installed:** <br>
+Open Android Studio → SDK Manager <br>
+Go to SDK Tools tab <br>
+Check ✅ NDK, CMake, and LLDB
    
