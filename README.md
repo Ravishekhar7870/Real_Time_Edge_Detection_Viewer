@@ -1,5 +1,5 @@
 # 👁️ Vision — Real-Time Edge Detection with OpenCV & OpenGL
-
+📱 **[Download APK](https://drive.google.com/uc?export=download&id=1XBRpw693laX1Ll75UFAJmY2XWS68lYLM)** – Try the app on your Android device
 **Vision** is a real-time Android app that captures live camera frames, processes them using native C++ (via OpenCV), and renders the result using OpenGL ES 2.0 for high-performance display. It supports front/back camera switching and shows both raw and processed views.
 
 ---
