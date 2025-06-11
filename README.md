@@ -53,4 +53,15 @@
 Open Android Studio → SDK Manager <br>
 Go to SDK Tools tab <br>
 Check ✅ NDK, CMake, and LLDB
+
+4. **Set native build path in build.gradle.kts:**
+   ```bash
+   externalNativeBuild {
+    cmake {
+        path = file("src/main/cpp/CMakeLists.txt")
+        version = "3.22.1"
+    }
+   }
+   ```
+
    
