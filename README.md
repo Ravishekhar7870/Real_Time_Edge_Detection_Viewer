@@ -63,5 +63,7 @@ Check ✅ NDK, CMake, and LLDB
     }
    }
    ```
-
+5. **Run the app:** <br>
+Grant camera permission <br>
+Test on a physical Android device (camera input on emulators may be limited)
    
